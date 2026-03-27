@@ -1,0 +1,10 @@
+# BPF build artifacts (parca-prof linked build)
+ebpf/*.o
+ebpf/*.ebpf.amd64
+ebpf/*.ebpf.arm64
+
+# cgo -godefs intermediate files
+_obj/
+
+# Go test binaries
+*.test
