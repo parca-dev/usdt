@@ -195,6 +195,28 @@ func TestParseUSDTArgSpec_ARM64(t *testing.T) {
 			},
 		},
 		{
+			name:  "bracket syntax without offset",
+			input: "8@[x0]",
+			expected: ArgSpec{
+				Arg_type:     ArgRegDeref,
+				Val_off:      0,
+				Reg_id:       RegX0,
+				Arg_signed:   false,
+				Arg_bitshift: 0,
+			},
+		},
+		{
+			name:  "bracket syntax without offset signed",
+			input: "-4@[sp]",
+			expected: ArgSpec{
+				Arg_type:     ArgRegDeref,
+				Val_off:      0,
+				Reg_id:       RegSP,
+				Arg_signed:   true,
+				Arg_bitshift: 32,
+			},
+		},
+		{
 			name:  "register value",
 			input: "8@x0",
 			expected: ArgSpec{
