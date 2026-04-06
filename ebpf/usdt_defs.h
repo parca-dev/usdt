@@ -1,10 +1,14 @@
 // Copyright The Parca Authors
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef USDT_USDT_H
-#define USDT_USDT_H
+#ifndef USDT_USDT_DEFS_H
+#define USDT_USDT_DEFS_H
 
-#include "kernel.h"
+// This header defines the data structures shared between the USDT BPF
+// programs and userspace. It deliberately includes nothing: consumers
+// must provide the integer typedefs (u8, u16, u32, u64, s8, s16, bool)
+// before including this file. BPF callers typically get these from
+// "kernel.h"; cgo callers from <stdint.h>/<stdbool.h> shims.
 
 // USDT argument specification structures
 enum bpf_usdt_arg_type {
@@ -92,4 +96,4 @@ struct bpf_usdt_spec {
   u8 _pad[6]; // Padding for alignment
 };
 
-#endif // USDT_USDT_H
+#endif // USDT_USDT_DEFS_H
