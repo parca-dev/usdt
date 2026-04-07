@@ -6,7 +6,20 @@
 package usdt // import "github.com/parca-dev/usdt"
 
 /*
-#include "ebpf/usdt.h"
+// usdt_defs.h has no includes by design — consumers must define the
+// kernel-style integer types it uses. Provide them here from <stdint.h>
+// so cgo -godefs can read the struct layouts.
+#include <stdint.h>
+#include <stdbool.h>
+typedef uint8_t  u8;
+typedef uint16_t u16;
+typedef uint32_t u32;
+typedef uint64_t u64;
+typedef int8_t   s8;
+typedef int16_t  s16;
+typedef int32_t  s32;
+typedef int64_t  s64;
+#include "ebpf/usdt_defs.h"
 */
 import "C"
 
@@ -83,9 +96,9 @@ const (
 )
 
 // ArgSpec represents a single USDT argument specification
-// Must match struct bpf_usdt_arg_spec in ebpf/usdt.h
+// Must match struct bpf_usdt_arg_spec in ebpf/usdt_defs.h
 type ArgSpec C.struct_bpf_usdt_arg_spec
 
 // Spec represents all arguments for a USDT probe (libbpf-compatible)
-// Must match struct bpf_usdt_spec in ebpf/usdt.h
+// Must match struct bpf_usdt_spec in ebpf/usdt_defs.h
 type Spec C.struct_bpf_usdt_spec

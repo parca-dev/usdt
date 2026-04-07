@@ -58,9 +58,13 @@ probes, err := usdt.ParseProbes(myCustomReader)
 
 ### eBPF headers
 
-Include in your BPF programs for USDT argument extraction:
+Include in your BPF programs for USDT argument extraction. The headers
+intentionally pull in nothing — your own prelude (providing `u8`/`u64`/
+`bool`/`pt_regs`/`EBPF_INLINE` and the BPF helper declarations) must be
+included first. The bundled `ebpf/kernel.h` is one such prelude:
 
 ```c
+#include "kernel.h"     // or your own equivalent
 #include "usdt_args.h"
 
 SEC("usdt/myprovider/myprobe")
@@ -70,6 +74,9 @@ int BPF_USDT(myprobe, s64 arg0, u64 arg1)
     return 0;
 }
 ```
+
+`usdt_defs.h` (struct/enum definitions only) can be included on its own
+when you just need the userspace-visible layouts without the BPF helpers.
 
 ## Building
 

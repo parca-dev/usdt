@@ -1,7 +1,8 @@
 // Copyright The Parca Authors
 // SPDX-License-Identifier: Apache-2.0
 
-#include "usdt.h"
+#include "kernel.h"
+#include "usdt_defs.h"
 
 char _license[] SEC("license") = "Dual MIT/GPL";
 

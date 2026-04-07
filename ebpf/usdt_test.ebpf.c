@@ -1,6 +1,7 @@
 // Copyright The Parca Authors
 // SPDX-License-Identifier: Apache-2.0
 
+#include "kernel.h"
 #include "usdt_args.h"
 
 // Provide the debug output flag needed by DEBUG_PRINT.

@@ -4,7 +4,7 @@
 #ifndef USDT_USDT_ARGS_H
 #define USDT_USDT_ARGS_H
 
-#include "usdt.h"
+#include "usdt_defs.h"
 
 // Forward declarations for USDT maps (defined in usdt.ebpf.c)
 extern struct usdt_specs_t __bpf_usdt_specs;
