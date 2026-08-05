@@ -3,7 +3,7 @@
 
 //go:build linux
 
-package test
+package testbpf_test
 
 import (
 	"os"
@@ -11,6 +11,7 @@ import (
 	"testing"
 
 	"github.com/parca-dev/usdt"
+	"github.com/parca-dev/usdt/internal/testbpf"
 )
 
 // TestParseSelfProbes parses USDT probes from the test binary itself.
@@ -19,7 +20,7 @@ import (
 // note section parsing, and argument extraction.
 func TestParseSelfProbes(t *testing.T) {
 	// Call the probes so the linker doesn't strip them
-	CallTestProbes()
+	testbpf.CallTestProbes()
 
 	exe, err := os.Executable()
 	if err != nil {
@@ -108,7 +109,7 @@ func TestOpenELF_BadPath(t *testing.T) {
 
 // TestParseSelfProbes_Architecture validates architecture-specific argument parsing.
 func TestParseSelfProbes_Architecture(t *testing.T) {
-	CallTestProbes()
+	testbpf.CallTestProbes()
 
 	exe, err := os.Executable()
 	if err != nil {

@@ -3,7 +3,7 @@
 
 //go:build linux
 
-package test // import "github.com/parca-dev/usdt/test"
+package testbpf
 
 /*
 #cgo CFLAGS: -I/usr/include
@@ -62,7 +62,7 @@ __attribute__((noinline)) void test_probe_uint8(uint8_t a, uint8_t b) {
 */
 import "C"
 
-// CallTestProbes calls all the USDT test probes to ensure they're included in the binary
+// CallTestProbes calls all the USDT test probes to ensure they're included in the binary.
 func CallTestProbes() {
 	var x C.int32_t = 42
 	var y C.int64_t = 1234567890

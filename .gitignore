@@ -8,3 +8,6 @@ _obj/
 
 # Go test binaries
 *.test
+
+# Built binaries
+bin/
