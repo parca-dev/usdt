@@ -13,7 +13,7 @@ import (
 	"github.com/cilium/ebpf"
 	"github.com/cilium/ebpf/link"
 
-	usdttest "github.com/parca-dev/usdt/test"
+	"github.com/parca-dev/usdt/internal/testbpf"
 )
 
 // TestUSDTProbeLifecycleSingle is a full end-to-end test:
@@ -90,7 +90,7 @@ func TestUSDTProbeLifecycleMulti(t *testing.T) {
 // ---------------------------------------------------------------------------
 
 type integrationSetup struct {
-	objs    bpfUsdtObjects
+	objs    testbpf.UsdtTestObjects
 	exe     *link.Executable
 	probes  []Probe
 	specIDs []uint32
@@ -100,7 +100,7 @@ func newIntegrationSetup(t *testing.T) *integrationSetup {
 	t.Helper()
 
 	// Ensure probes are compiled into the binary.
-	usdttest.CallTestProbes()
+	testbpf.CallTestProbes()
 
 	exePath, err := os.Executable()
 	if err != nil {
@@ -134,9 +134,9 @@ func newIntegrationSetup(t *testing.T) *integrationSetup {
 	}
 
 	// Load BPF objects.
-	var objs bpfUsdtObjects
-	if err := loadBpfUsdtObjects(&objs, nil); err != nil {
-		t.Fatalf("loadBpfUsdtObjects: %v", err)
+	var objs testbpf.UsdtTestObjects
+	if err := testbpf.LoadUsdtTestObjects(&objs, nil); err != nil {
+		t.Fatalf("LoadUsdtTestObjects: %v", err)
 	}
 
 	// Populate the spec map with argument metadata.
@@ -193,7 +193,7 @@ func (s *integrationSetup) fireAndVerify(t *testing.T) {
 
 	// Fire probes several times.
 	for range 10 {
-		usdttest.CallTestProbes()
+		testbpf.CallTestProbes()
 		time.Sleep(10 * time.Millisecond)
 	}
 
