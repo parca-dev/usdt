@@ -12,6 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install systemtap-sdt-dev
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y systemtap-sdt-dev
+
       - uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
